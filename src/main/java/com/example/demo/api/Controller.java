@@ -2,11 +2,9 @@ package com.example.demo.api;
 
 import com.example.demo.DAO.DaoMySQL;
 import com.example.demo.model.Room;
+import com.example.demo.model.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -25,6 +23,18 @@ public class Controller {
     @GetMapping
     public String test(){
         return "test ok!";
+    }
+
+    @PostMapping("/room")
+    public void addRoom(@RequestBody Room room){
+        doaMySQL.addRoom(room);
+    }
+
+    // define a method to handle HTTP POST requests of hotel information, which is directly use the method of Doa class.
+    // add @PostMapping annotation to mapping the requests with the endpoint of '/hotel'.
+    @PostMapping("/hotel")
+    public void addHotel(@RequestBody Hotel hotel) {
+        doaMySQL.addHotel(hotel);
     }
 
     @GetMapping( path = "/room/{room_id}")
